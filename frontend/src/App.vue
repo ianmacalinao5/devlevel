@@ -8,13 +8,16 @@ import HeaderLayout from "@/layouts/HeaderLayout.vue";
 const layouts = { AuthLayout, SidebarLayout, HeaderLayout };
 
 const route = useRoute();
-const currentLayout = computed(
-    () => layouts[route.meta.layout as keyof typeof layouts] ?? HeaderLayout,
-);
+const currentLayout = computed(() => {
+    const layoutName = route.meta.layout as keyof typeof layouts;
+    return layoutName ? layouts[layoutName] : null;
+});
 </script>
 
 <template>
-    <component :is="currentLayout">
+    <component v-if="currentLayout" :is="currentLayout">
         <RouterView />
     </component>
+
+    <RouterView v-else />
 </template>

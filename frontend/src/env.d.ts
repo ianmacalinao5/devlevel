@@ -3,5 +3,6 @@ import "vue-router";
 declare module "vue-router" {
     interface RouteMeta {
         layout?: "AuthLayout" | "SidebarLayout" | "HeaderLayout";
+        title?: string;
     }
 }

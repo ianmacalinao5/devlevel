@@ -14,7 +14,7 @@ const isActive = computed(() => (path: string) => route.path === path);
 </script>
 
 <template>
-    <nav class="flex items-center gap-6">
+    <nav class="flex items-center gap-7">
         <RouterLink
             v-for="link in navLinks"
             :key="link.path"
@@ -29,6 +29,8 @@ const isActive = computed(() => (path: string) => route.path === path);
             {{ link.name }}
         </RouterLink>
 
-        <Button variant="emerald">Login</Button>
+        <Button variant="emerald">
+            <RouterLink to="/login">Login</RouterLink>
+        </Button>
     </nav>
 </template>

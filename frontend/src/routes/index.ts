@@ -10,26 +10,53 @@ import Dashboard from "@/views/dashboard/Dashboard.vue";
 import Users from "@/views/dashboard/Users.vue";
 import Home from "@/views/public/Home.vue";
 import About from "@/views/public/About.vue";
-import NotFound from "@/views/errors/NotFound.vue";
 
 const routes: RouteRecordRaw[] = [
-    { path: "/", component: Home, meta: { layout: "HeaderLayout" } },
-    { path: "/about", component: About, meta: { layout: "HeaderLayout" } },
+    {
+        path: "/",
+        component: Home,
+        meta: { layout: "HeaderLayout", title: "Home" },
+    },
+    {
+        path: "/about",
+        component: About,
+        meta: { layout: "HeaderLayout", title: "About" },
+    },
 
-    { path: "/login", component: Login, meta: { layout: "AuthLayout" } },
-    { path: "/register", component: Register, meta: { layout: "AuthLayout" } },
+    {
+        path: "/login",
+        component: Login,
+        meta: { layout: "AuthLayout", title: "Login" },
+    },
+    {
+        path: "/register",
+        component: Register,
+        meta: { layout: "AuthLayout", title: "Register" },
+    },
 
     {
         path: "/dashboard",
         component: Dashboard,
-        meta: { layout: "SidebarLayout" },
+        meta: { layout: "SidebarLayout", title: "Dashboard" },
     },
-    { path: "/users", component: Users, meta: { layout: "SidebarLayout" } },
+    {
+        path: "/users",
+        component: Users,
+        meta: { layout: "SidebarLayout", title: "Users" },
+    },
 
-    { path: "/:pathMatch(.*)*", component: NotFound },
+    {
+        path: "/:pathMatch(.*)*",
+        component: () => import("@/views/errors/NotFound.vue"),
+        meta: { title: "404 Not Found" },
+    },
 ];
 
 export const router = createRouter({
     history: createWebHistory(),
     routes,
+});
+
+router.afterEach((to) => {
+    document.title = to.meta.title?.concat(" - DevLevel") || "DevLevel";
 });
