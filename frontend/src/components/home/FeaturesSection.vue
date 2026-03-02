@@ -30,11 +30,13 @@ defineProps<{
                         :is="feature.icon"
                         class="size-5 text-emerald-500"
                     />
-                    <CardTitle>{{ feature.title }}</CardTitle>
+                    <CardTitle class="text-slate-800 text-lg">{{
+                        feature.title
+                    }}</CardTitle>
                 </CardHeader>
 
                 <CardContent>
-                    <p class="text-muted-foreground text-sm">
+                    <p class="text-slate-500 text-base">
                         {{ feature.description }}
                     </p>
                 </CardContent>

@@ -5,7 +5,9 @@ const currentYear = computed(() => new Date().getFullYear());
 </script>
 
 <template>
-    <footer class="border-t p-4 text-center text-sm mt-10">
+    <footer
+        class="border-t p-4 text-center text-base mt-10 font-medium text-slate-700"
+    >
         © {{ currentYear }} DevLevel. All rights reserved.
     </footer>
 </template>

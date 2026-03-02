@@ -8,11 +8,13 @@ import Logo from "@/assets/devlevel-logo.png";
         class="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-5 gap-10 items-center"
     >
         <div class="md:col-span-3 text-center md:text-left">
-            <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
+            <h1
+                class="text-4xl md:text-5xl font-bold tracking-tight text-slate-800"
+            >
                 Welcome to <span class="text-emerald-600">DevLevel</span>
             </h1>
 
-            <p class="mt-4 text-lg text-gray-600 max-w-xl mx-auto md:mx-0">
+            <p class="mt-4 text-xl text-slate-500 max-w-xl mx-auto md:mx-0">
                 Track your progress, manage your tasks, and level up your
                 developer skills every day.
             </p>
@@ -27,7 +29,11 @@ import Logo from "@/assets/devlevel-logo.png";
                 </RouterLink>
 
                 <RouterLink to="/about">
-                    <Button variant="outline" size="lg" class="rounded-full">
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        class="rounded-full text-slate-800"
+                    >
                         Learn More
                     </Button>
                 </RouterLink>

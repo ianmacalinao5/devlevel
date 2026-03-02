@@ -12,7 +12,7 @@ import Logo from "@/assets/devlevel-logo.png";
             >
                 <div class="flex items-end gap-3">
                     <img :src="Logo" alt="DevLevel logo" class="h-8 w-8" />
-                    <h1 class="font-semibold text-gray-800 text-xl">
+                    <h1 class="font-semibold text-slate-700 text-xl">
                         DevLevel
                     </h1>
                 </div>

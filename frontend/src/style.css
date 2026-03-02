@@ -119,5 +119,23 @@
     }
     body {
         @apply bg-background text-foreground;
+        @apply text-slate-700;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply text-slate-800 font-semibold;
+    }
+
+    p {
+        @apply text-slate-600;
+    }
+
+    small {
+        @apply text-slate-500;
     }
 }

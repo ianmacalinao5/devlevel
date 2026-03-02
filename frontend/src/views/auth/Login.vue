@@ -3,7 +3,5 @@ import Button from "@/components/ui/button/Button.vue";
 </script>
 
 <template>
-    <h1 class="text-2xl font-medium">Login</h1>
-
-    <Button> Hello World </Button>
+    <h1 class="text-2xl font-semibold text-slate-800">Login</h1>
 </template>

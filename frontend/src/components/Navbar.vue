@@ -23,7 +23,7 @@ const isActive = computed(() => (path: string) => route.path === path);
             :class="
                 isActive(link.path)
                     ? 'text-emerald-600'
-                    : 'text-gray-700 hover:text-emerald-500'
+                    : 'text-slate-700 hover:text-emerald-500'
             "
         >
             {{ link.name }}

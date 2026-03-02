@@ -22,7 +22,7 @@ const features = [
 ];
 </script>
 <template>
-    <main class="min-h-screen text-gray-900">
+    <main class="min-h-screen">
         <HeroSection />
         <FeaturesSection :features="features" />
     </main>
