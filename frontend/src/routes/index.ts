@@ -1,49 +1,32 @@
-import { createWebHistory, createRouter } from "vue-router";
-
-import AuthLayout from "@/layouts/AuthLayout.vue";
-import SidebarLayout from "@/layouts/SidebarLayout.vue";
-import HeaderLayout from "@/layouts/HeaderLayout.vue";
+import {
+    createWebHistory,
+    createRouter,
+    type RouteRecordRaw,
+} from "vue-router";
 
 import Login from "@/views/auth/Login.vue";
 import Register from "@/views/auth/Register.vue";
-
 import Dashboard from "@/views/dashboard/Dashboard.vue";
 import Users from "@/views/dashboard/Users.vue";
-
 import Home from "@/views/public/Home.vue";
 import About from "@/views/public/About.vue";
-
 import NotFound from "@/views/errors/NotFound.vue";
 
-const routes = [
-    {
-        path: "/auth",
-        component: AuthLayout,
-        children: [
-            { path: "login", component: Login },
-            { path: "register", component: Register },
-        ],
-    },
+const routes: RouteRecordRaw[] = [
+    { path: "/", component: Home, meta: { layout: "HeaderLayout" } },
+    { path: "/about", component: About, meta: { layout: "HeaderLayout" } },
+
+    { path: "/login", component: Login, meta: { layout: "AuthLayout" } },
+    { path: "/register", component: Register, meta: { layout: "AuthLayout" } },
 
     {
-        path: "/user",
-        component: SidebarLayout,
-        children: [
-            { path: "dashboard", component: Dashboard },
-            { path: "users", component: Users },
-        ],
+        path: "/dashboard",
+        component: Dashboard,
+        meta: { layout: "SidebarLayout" },
     },
+    { path: "/users", component: Users, meta: { layout: "SidebarLayout" } },
 
-    {
-        path: "/",
-        component: HeaderLayout,
-        children: [
-            { path: "", component: Home },
-            { path: "about", component: About },
-        ],
-    },
-
-    { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
+    { path: "/:pathMatch(.*)*", component: NotFound },
 ];
 
 export const router = createRouter({

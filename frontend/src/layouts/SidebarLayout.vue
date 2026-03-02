@@ -8,9 +8,9 @@ teplat
             <h2 class="text-lg font-bold">Dashboard</h2>
 
             <nav class="flex flex-col space-y-2">
-                <RouterLink to="/app/dashboard">Dashboard</RouterLink>
-                <RouterLink to="/app/users">Users</RouterLink>
-                <RouterLink to="/app/settings">Settings</RouterLink>
+                <RouterLink to="/dashboard">Dashboard</RouterLink>
+                <RouterLink to="/users">Users</RouterLink>
+                <RouterLink to="/settings">Settings</RouterLink>
             </nav>
         </aside>
 

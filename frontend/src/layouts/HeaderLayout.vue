@@ -1,24 +1,29 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
+import Logo from "@/assets/devlevel-logo.png";
+</script>
 
 <template>
-    <div class="min-h-screen flex flex-col">
-        <!-- Header -->
-        <header class="border-b p-4 flex justify-between items-center">
-            <h1 class="font-bold text-lg">MyApp</h1>
+    <div class="w-full bg-gray-50">
+        <header class="border-b sticky top-0 z-50 bg-white/80 backdrop-blur">
+            <div
+                class="max-w-7xl mx-auto px-5 py-2 flex justify-between items-center"
+            >
+                <div class="flex items-end gap-3">
+                    <img :src="Logo" alt="DevLevel logo" class="h-8 w-8" />
+                    <h1 class="font-semibold text-gray-800 text-xl">
+                        DevLevel
+                    </h1>
+                </div>
 
-            <nav class="space-x-4">
-                <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/site/about">About</RouterLink>
-                <RouterLink to="/login">Login</RouterLink>
-            </nav>
+                <Navbar />
+            </div>
         </header>
 
-        <!-- Page Content -->
-        <main class="flex-1 p-6">
+        <main class="max-w-7xl mx-auto px-5 py-2">
             <RouterView />
+            <Footer />
         </main>
-
-        <!-- Footer -->
-        <footer class="border-t p-4 text-center text-sm">© 2026 MyApp</footer>
     </div>
 </template>
