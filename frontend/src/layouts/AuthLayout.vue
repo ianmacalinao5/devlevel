@@ -9,7 +9,7 @@ import Logo from "@/assets/devlevel-logo.png";
         >
             <img :src="Logo" alt="DevLevel logo" class="h-50 mb-6" />
 
-            <h1 class="text-4xl font-bold mb-3">DevLevel</h1>
+            <h1 class="text-4xl font-bold mb-3 text-emerald-100">DevLevel</h1>
 
             <p class="text-center text-white max-w-md text-lg">
                 Track your growth, build consistency, and visualize your
