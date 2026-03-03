@@ -5,7 +5,7 @@ import {
 } from "vue-router";
 
 import Login from "@/views/auth/Login.vue";
-import Register from "@/views/auth/Register.vue";
+import Signup from "@/views/auth/Signup.vue";
 import Dashboard from "@/views/dashboard/Dashboard.vue";
 import Users from "@/views/dashboard/Users.vue";
 import Home from "@/views/public/Home.vue";
@@ -29,9 +29,9 @@ const routes: RouteRecordRaw[] = [
         meta: { layout: "AuthLayout", title: "Login" },
     },
     {
-        path: "/register",
-        component: Register,
-        meta: { layout: "AuthLayout", title: "Register" },
+        path: "/signup",
+        component: Signup,
+        meta: { layout: "AuthLayout", title: "Signup" },
     },
 
     {

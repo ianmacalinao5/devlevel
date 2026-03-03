@@ -22,7 +22,7 @@ import Logo from "@/assets/devlevel-logo.png";
             <div
                 class="mt-8 flex flex-wrap justify-center md:justify-start gap-4"
             >
-                <RouterLink to="/login">
+                <RouterLink to="/signup">
                     <Button variant="emerald" size="lg" class="rounded-full">
                         Get Started
                     </Button>

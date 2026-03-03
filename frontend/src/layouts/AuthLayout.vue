@@ -7,7 +7,13 @@ import Logo from "@/assets/devlevel-logo.png";
         <div
             class="hidden md:flex flex-col items-center justify-center bg-emerald-600 text-white p-12"
         >
-            <img :src="Logo" alt="DevLevel logo" class="h-50 mb-6" />
+            <RouterLink to="/">
+                <img
+                    :src="Logo"
+                    alt="DevLevel logo"
+                    class="h-50 mb-6 drop-shadow drop-shadow-amber-50"
+                />
+            </RouterLink>
 
             <h1 class="text-4xl font-bold mb-3 text-emerald-100">DevLevel</h1>
 
