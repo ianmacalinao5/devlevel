@@ -4,6 +4,8 @@ import { useRoute } from "vue-router";
 import AuthLayout from "@/layouts/AuthLayout.vue";
 import SidebarLayout from "@/layouts/SidebarLayout.vue";
 import HeaderLayout from "@/layouts/HeaderLayout.vue";
+import "vue-sonner/style.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const layouts = { AuthLayout, SidebarLayout, HeaderLayout };
 
@@ -20,4 +22,6 @@ const currentLayout = computed(() => {
     </component>
 
     <RouterView v-else />
+
+    <Toaster position="top-right" />
 </template>

@@ -1,4 +1,6 @@
 import { ref } from "vue";
+import * as authService from "@/services/auth";
+import { toast } from "vue-sonner";
 
 export function useSignup() {
     const name = ref("");
@@ -11,6 +13,7 @@ export function useSignup() {
     const confirmPasswordError = ref("");
     const showPassword = ref(false);
     const showConfirmPassword = ref(false);
+    const loading = ref(false);
     const errorClass =
         "border-red-500 focus-visible:ring-red-500/50 focus-visible:ring-[3px] focus-visible:border-red-500";
 
@@ -66,17 +69,32 @@ export function useSignup() {
         return isValid;
     }
 
-    function signup() {
+    async function signup() {
         const isValid = validate();
 
         if (!isValid) return;
 
-        console.log("Signup successful!");
+        loading.value = true;
 
-        name.value = "";
-        email.value = "";
-        password.value = "";
-        confirmPassword.value = "";
+        try {
+            await authService.signup(
+                name.value,
+                email.value,
+                password.value,
+                confirmPassword.value,
+            );
+
+            toast.success("Signup successful!");
+
+            name.value = "";
+            email.value = "";
+            password.value = "";
+            confirmPassword.value = "";
+        } catch (error) {
+            toast.error("Signup failed. Please try again.");
+        } finally {
+            loading.value = false;
+        }
     }
 
     return {
@@ -91,6 +109,7 @@ export function useSignup() {
         errorClass,
         showPassword,
         showConfirmPassword,
+        loading,
         togglePasswordVisibility,
         signup,
     };
