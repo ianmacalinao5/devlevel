@@ -1,5 +1,16 @@
-teplat
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Button from "@/components/ui/button/Button.vue";
+import { useAuthStore } from "@/stores/useAuthStore";
+import { useRouter } from "vue-router";
+
+const user = useAuthStore();
+const router = useRouter();
+
+function logout() {
+    user.logout;
+    router.push("/");
+}
+</script>
 
 <template>
     <div class="min-h-screen flex">
@@ -19,7 +30,7 @@ teplat
             <!-- Topbar -->
             <header class="border-b p-4 flex justify-between">
                 <span>Welcome back 👋</span>
-                <button class="text-sm">Logout</button>
+                <Button class="text-sm" @click="logout">Logout</Button>
             </header>
 
             <!-- Page -->

@@ -1,4 +1,6 @@
 import { ref } from "vue";
+import { useAuthStore } from "@/stores/useAuthStore";
+import { useRouter } from "vue-router";
 
 export function useLogin() {
     const email = ref("");
@@ -8,6 +10,9 @@ export function useLogin() {
     const showPassword = ref(false);
     const errorClass =
         "border-red-500 focus-visible:ring-red-500/50 focus-visible:ring-[3px] focus-visible:border-red-500";
+
+    const authStore = useAuthStore();
+    const router = useRouter();
 
     function togglePasswordVisibility() {
         showPassword.value = !showPassword.value;
@@ -40,11 +45,10 @@ export function useLogin() {
 
         if (!isValid) return;
 
-        if (
-            email.value === "hello@example.com" &&
-            password.value === "password"
-        ) {
-            alert("Login successful!");
+        console.log(email.value, password.value);
+
+        if (authStore.login(email.value, password.value)) {
+            router.push("/dashboard");
             email.value = "";
             password.value = "";
         } else {
