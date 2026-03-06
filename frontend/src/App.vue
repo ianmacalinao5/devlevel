@@ -23,5 +23,10 @@ const currentLayout = computed(() => {
 
     <RouterView v-else />
 
-    <Toaster position="top-right" />
+    <Toaster
+        position="top-right"
+        :closeButton="true"
+        closeButtonPosition="top-right"
+        richColors
+    />
 </template>
