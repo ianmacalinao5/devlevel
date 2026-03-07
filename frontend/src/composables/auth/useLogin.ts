@@ -1,6 +1,8 @@
 import { ref } from "vue";
-import { useAuthStore } from "@/stores/useAuthStore";
 import { useRouter } from "vue-router";
+import * as authService from "@/services/auth";
+import { toast } from "vue-sonner";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 export function useLogin() {
     const email = ref("");
@@ -8,11 +10,13 @@ export function useLogin() {
     const emailError = ref("");
     const passwordError = ref("");
     const showPassword = ref(false);
+    const loading = ref(false);
+
     const errorClass =
         "border-red-500 focus-visible:ring-red-500/50 focus-visible:ring-[3px] focus-visible:border-red-500";
 
-    const authStore = useAuthStore();
     const router = useRouter();
+    const authStore = useAuthStore();
 
     function togglePasswordVisibility() {
         showPassword.value = !showPassword.value;
@@ -40,19 +44,32 @@ export function useLogin() {
         return isValid;
     }
 
-    function login() {
+    async function login() {
         const isValid = validate();
-
         if (!isValid) return;
 
-        console.log(email.value, password.value);
+        loading.value = true;
 
-        if (authStore.login(email.value, password.value)) {
+        try {
+            const data = await authService.login(email.value, password.value);
+            console.log(data);
+            authStore.setAuth(data);
+
+            toast.success("Login successful");
+
             router.push("/dashboard");
+
             email.value = "";
             password.value = "";
-        } else {
-            alert("Invalid email or password.");
+        } catch (error: any) {
+            const message =
+                error.response?.data?.errors?.email?.[0] ||
+                error.response?.data?.message ||
+                "Login failed";
+
+            toast.error(message);
+        } finally {
+            loading.value = false;
         }
     }
 
@@ -63,6 +80,7 @@ export function useLogin() {
         passwordError,
         errorClass,
         showPassword,
+        loading,
         togglePasswordVisibility,
         login,
     };

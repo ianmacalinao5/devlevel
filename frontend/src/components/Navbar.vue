@@ -29,8 +29,8 @@ const isActive = computed(() => (path: string) => route.path === path);
             {{ link.name }}
         </RouterLink>
 
-        <Button variant="emerald">
-            <RouterLink to="/login">Login</RouterLink>
-        </Button>
+        <RouterLink to="/login">
+            <Button variant="emerald">Login</Button>
+        </RouterLink>
     </nav>
 </template>
