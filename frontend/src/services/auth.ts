@@ -32,5 +32,6 @@ export const logout = async () => {
 
 export const getUser = async () => {
     const response = await api.get("/user");
+    console.log(response.data);
     return response.data;
 };

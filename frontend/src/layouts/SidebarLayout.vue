@@ -3,6 +3,7 @@ import Button from "@/components/ui/button/Button.vue";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useRouter } from "vue-router";
 import { toast } from "vue-sonner";
+import Skeleton from "@/components/ui/skeleton/Skeleton.vue";
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -16,7 +17,6 @@ async function logout() {
 
 <template>
     <div class="min-h-screen flex bg-muted/30">
-        <!-- Sidebar -->
         <aside class="w-64 border-r bg-background p-6 flex flex-col gap-6">
             <h2 class="text-lg font-semibold">Dashboard</h2>
 
@@ -41,23 +41,22 @@ async function logout() {
             </nav>
         </aside>
 
-        <!-- Content -->
         <div class="flex-1 flex flex-col">
-            <!-- Topbar -->
             <header
                 class="border-b bg-background px-6 py-4 flex justify-between items-center"
             >
                 <span class="text-sm text-muted-foreground">
-                    Welcome back {{ authStore.user?.name ?? "User" }}
-                    {{ authStore.user?.email ?? "User" }}
-                </span>
+                    <template v-if="authStore.user">
+                        Welcome back {{ authStore.user.name }}
+                    </template>
 
+                    <template v-else> <Skeleton class="w-20 h-4" /> </template>
+                </span>
                 <Button variant="destructive" size="sm" @click="logout">
                     Logout
                 </Button>
             </header>
 
-            <!-- Page -->
             <main class="p-6 flex-1">
                 <RouterView />
             </main>

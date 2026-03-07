@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
 	return $request->user();
-})->middleware('sanctum:auth');
+})->middleware('auth:sanctum');
 
 Route::post('/signup', [SignupController::class, 'store']);
 Route::post('/login', [LoginController::class, 'login']);

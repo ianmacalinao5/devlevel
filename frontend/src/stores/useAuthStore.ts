@@ -4,8 +4,9 @@ import * as authService from "@/services/auth";
 
 export const useAuthStore = defineStore("auth", () => {
     const isAuthenticated = ref(false);
+    const isReady = ref(false);
     const user = ref<{ email: string; name: string } | null>(null);
-    const token = ref<string | null>(null);
+    const token = ref<string | null>(localStorage.getItem("token"));
 
     function setAuth(data: {
         user: { email: string; name: string };
@@ -14,6 +15,26 @@ export const useAuthStore = defineStore("auth", () => {
         user.value = data.user;
         token.value = data.token;
         isAuthenticated.value = true;
+
+        localStorage.setItem("token", data.token);
+    }
+
+    async function initialize() {
+        if (token.value) {
+            await fetchUser();
+        }
+    }
+
+    async function fetchUser() {
+        try {
+            const res = await authService.getUser();
+            user.value = res;
+            isAuthenticated.value = true;
+        } catch (error) {
+            logout();
+        } finally {
+            isReady.value = true;
+        }
     }
 
     async function logout() {
@@ -25,8 +46,18 @@ export const useAuthStore = defineStore("auth", () => {
             user.value = null;
             token.value = null;
             isAuthenticated.value = false;
+            localStorage.removeItem("token");
         }
     }
 
-    return { user, token, isAuthenticated, setAuth, logout };
+    return {
+        user,
+        token,
+        isAuthenticated,
+        isReady,
+        setAuth,
+        fetchUser,
+        initialize,
+        logout,
+    };
 });
