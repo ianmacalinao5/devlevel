@@ -15,7 +15,6 @@ export const useAuthStore = defineStore("auth", () => {
         user.value = data.user;
         token.value = data.token;
         isAuthenticated.value = true;
-
         localStorage.setItem("token", data.token);
     }
 

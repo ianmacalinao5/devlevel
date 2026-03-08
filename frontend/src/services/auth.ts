@@ -1,20 +1,16 @@
 import api from "./api";
 
-export const login = async (email: string, password: string) => {
-    const response = await api.post("/login", {
-        email,
-        password,
-    });
-
+export async function login(email: string, password: string) {
+    const response = await api.post("/login", { email, password });
     return response.data;
-};
+}
 
-export const signup = async (
+export async function signup(
     name: string,
     email: string,
     password: string,
     confirmPassword: string,
-) => {
+) {
     const response = await api.post("/signup", {
         name,
         email,
@@ -23,15 +19,14 @@ export const signup = async (
     });
 
     return response.data;
-};
+}
 
-export const logout = async () => {
+export async function logout() {
     const response = await api.post("/logout");
     return response.data;
-};
+}
 
-export const getUser = async () => {
+export async function getUser() {
     const response = await api.get("/user");
-    console.log(response.data);
     return response.data;
-};
+}
