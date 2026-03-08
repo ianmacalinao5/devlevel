@@ -20,9 +20,12 @@ export const useAuthStore = defineStore("auth", () => {
     }
 
     async function initialize() {
-        if (token.value) {
-            await fetchUser();
+        if (!token.value) {
+            isReady.value = true;
+            return;
         }
+
+        await fetchUser();
     }
 
     async function fetchUser() {

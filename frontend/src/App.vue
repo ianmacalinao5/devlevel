@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
+
 import AuthLayout from "@/layouts/AuthLayout.vue";
 import SidebarLayout from "@/layouts/SidebarLayout.vue";
 import HeaderLayout from "@/layouts/HeaderLayout.vue";
-import Skeleton from "./components/Skeleton.vue";
-import "vue-sonner/style.css";
+
 import { Toaster } from "@/components/ui/sonner";
-import { useAuthStore } from "./stores/useAuthStore";
+import "vue-sonner/style.css";
 
 const layouts = { AuthLayout, SidebarLayout, HeaderLayout };
-const authStore = useAuthStore();
+
 const route = useRoute();
 
 const currentLayout = computed(() => {
@@ -20,17 +20,16 @@ const currentLayout = computed(() => {
 </script>
 
 <template>
-    <template v-if="authStore.isReady">
-        <component v-if="currentLayout" :is="currentLayout">
-            <RouterView />
-        </component>
-        <RouterView v-else />
-    </template>
+    <component v-if="currentLayout" :is="currentLayout">
+        <RouterView />
+    </component>
 
-    <template v-else>
-        <Skeleton />
-    </template>
+    <RouterView v-else />
 
-    <Toaster position="top-right" :closeButton="true" richColors />
+    <Toaster
+        position="top-right"
+        :closeButton="true"
+        closeButtonPosition="top-right"
+        richColors
+    />
 </template>
->

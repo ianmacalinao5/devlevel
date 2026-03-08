@@ -2,7 +2,9 @@
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import Button from "./ui/button/Button.vue";
+import { useAuthStore } from "@/stores/useAuthStore";
 
+const user = useAuthStore();
 const route = useRoute();
 
 const navLinks = [
@@ -10,6 +12,9 @@ const navLinks = [
     { name: "About", path: "/about" },
 ];
 
+const isAuthenticated = computed(() =>
+    user.isAuthenticated ? "/dashboard" : "/login",
+);
 const isActive = computed(() => (path: string) => route.path === path);
 </script>
 
@@ -29,8 +34,10 @@ const isActive = computed(() => (path: string) => route.path === path);
             {{ link.name }}
         </RouterLink>
 
-        <RouterLink to="/login">
-            <Button variant="emerald">Login</Button>
+        <RouterLink :to="isAuthenticated">
+            <Button variant="emerald">{{
+                user.isAuthenticated ? "Dashboard" : "Login"
+            }}</Button>
         </RouterLink>
     </nav>
 </template>

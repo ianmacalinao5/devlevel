@@ -3,7 +3,7 @@ import { Eye, EyeOff } from "lucide-vue-next";
 import Button from "@/components/ui/button/Button.vue";
 import Input from "@/components/ui/input/Input.vue";
 import Label from "@/components/ui/label/Label.vue";
-
+import Spinner from "@/components/ui/spinner/Spinner.vue";
 import { useLogin } from "@/composables/auth/useLogin";
 
 const {
@@ -13,6 +13,7 @@ const {
     passwordError,
     errorClass,
     showPassword,
+    loading,
     togglePasswordVisibility,
     login,
 } = useLogin();
@@ -69,8 +70,16 @@ const {
                 </p>
             </div>
 
-            <Button type="submit" variant="emerald" class="w-full">
-                Log in
+            <Button
+                type="submit"
+                variant="emerald"
+                class="w-full"
+                :disabled="loading"
+            >
+                <span class="flex items-center justify-center gap-2">
+                    <Spinner v-if="loading" />
+                    {{ loading ? "Logging In..." : "Log In" }}
+                </span>
             </Button>
 
             <p class="text-center">
