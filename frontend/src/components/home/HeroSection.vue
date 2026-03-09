@@ -9,7 +9,7 @@ import Logo from "@/assets/devlevel-logo.png";
     >
         <div class="md:col-span-3 text-center md:text-left">
             <h1
-                class="text-4xl md:text-5xl font-bold tracking-tight text-slate-800"
+                class="scroll-m-20 text-4xl md:text-5xl font-extrabold tracking-tight text-slate-800 text-balance"
             >
                 Welcome to <span class="text-emerald-600">DevLevel</span>
             </h1>

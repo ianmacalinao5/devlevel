@@ -4,6 +4,8 @@ import { useAuthStore } from "@/stores/useAuthStore";
 import { useRouter } from "vue-router";
 import { toast } from "vue-sonner";
 import Skeleton from "@/components/ui/skeleton/Skeleton.vue";
+import AppSidebar from "@/components/AppSidebar.vue";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -16,50 +18,39 @@ async function logout() {
 </script>
 
 <template>
-    <div class="min-h-screen flex bg-muted/30">
-        <aside class="w-64 border-r bg-background p-6 flex flex-col gap-6">
-            <h2 class="text-lg font-semibold">Dashboard</h2>
+    <SidebarProvider>
+        <div class="flex min-h-screen w-full bg-muted/30">
+            <!-- Sidebar -->
+            <AppSidebar />
 
-            <nav class="flex flex-col gap-2">
-                <RouterLink to="/dashboard">
-                    <Button variant="ghost" class="w-full justify-start">
-                        Dashboard
+            <!-- Content Area -->
+            <div class="flex flex-1 flex-col">
+                <!-- Header -->
+                <header
+                    class="border-b bg-background px-6 py-3 flex justify-between items-center"
+                >
+                    <SidebarTrigger />
+
+                    <span class="text-sm text-muted-foreground">
+                        <template v-if="authStore.user">
+                            Welcome back {{ authStore.user.name }}
+                        </template>
+
+                        <template v-else>
+                            <Skeleton class="w-20 h-4" />
+                        </template>
+                    </span>
+
+                    <Button variant="destructive" size="sm" @click="logout">
+                        Logout
                     </Button>
-                </RouterLink>
+                </header>
 
-                <RouterLink to="/users">
-                    <Button variant="ghost" class="w-full justify-start">
-                        Users
-                    </Button>
-                </RouterLink>
-
-                <RouterLink to="/settings">
-                    <Button variant="ghost" class="w-full justify-start">
-                        Settings
-                    </Button>
-                </RouterLink>
-            </nav>
-        </aside>
-
-        <div class="flex-1 flex flex-col">
-            <header
-                class="border-b bg-background px-6 py-4 flex justify-between items-center"
-            >
-                <span class="text-sm text-muted-foreground">
-                    <template v-if="authStore.user">
-                        Welcome back {{ authStore.user.name }}
-                    </template>
-
-                    <template v-else> <Skeleton class="w-20 h-4" /> </template>
-                </span>
-                <Button variant="destructive" size="sm" @click="logout">
-                    Logout
-                </Button>
-            </header>
-
-            <main class="p-6 flex-1">
-                <RouterView />
-            </main>
+                <!-- Main Content -->
+                <main class="flex-1 p-6">
+                    <RouterView />
+                </main>
+            </div>
         </div>
-    </div>
+    </SidebarProvider>
 </template>

@@ -52,11 +52,9 @@ export function useLogin() {
 
         try {
             const data = await authService.login(email.value, password.value);
-            console.log(data);
+
             authStore.setAuth(data);
-
             toast.success("Login successful");
-
             router.push("/dashboard");
 
             email.value = "";

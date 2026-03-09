@@ -25,6 +25,12 @@ import Logo from "@/assets/devlevel-logo.png";
 
         <div class="flex items-center justify-center bg-gray-100 p-6">
             <div class="w-full max-w-md">
+                <h1
+                    class="text-4xl text-center font-bold mb-3 text-emerald-600 md:hidden"
+                >
+                    DevLevel
+                </h1>
+
                 <RouterView />
             </div>
         </div>
