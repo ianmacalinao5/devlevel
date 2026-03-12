@@ -5,11 +5,13 @@ import * as authService from "@/services/auth";
 export const useAuthStore = defineStore("auth", () => {
     const isAuthenticated = ref(false);
     const isReady = ref(false);
-    const user = ref<{ email: string; name: string } | null>(null);
+    const user = ref<{ email: string; name: string; avatar: string } | null>(
+        null,
+    );
     const token = ref<string | null>(localStorage.getItem("token"));
 
     function setAuth(data: {
-        user: { email: string; name: string };
+        user: { email: string; name: string; avatar: string };
         token: string;
     }) {
         user.value = data.user;

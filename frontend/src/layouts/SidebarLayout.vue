@@ -27,7 +27,7 @@ async function logout() {
             <div class="flex flex-1 flex-col">
                 <!-- Header -->
                 <header
-                    class="border-b bg-background px-6 py-3 flex justify-between items-center"
+                    class="border-b bg-background px-2 md:px-6 py-3 flex justify-between items-center"
                 >
                     <SidebarTrigger />
 

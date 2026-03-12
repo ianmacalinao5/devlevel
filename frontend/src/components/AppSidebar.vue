@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-vue-next";
+import {
+    LayoutDashboard,
+    BookOpen,
+    CheckSquare,
+    Activity,
+    BarChart2,
+    Settings,
+} from "lucide-vue-next";
 import { RouterLink, useRoute } from "vue-router";
 import Logo from "@/assets/devlevel-logo.png";
 import {
@@ -7,55 +14,51 @@ import {
     SidebarContent,
     SidebarGroup,
     SidebarGroupContent,
-    SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarHeader,
 } from "@/components/ui/sidebar";
+import AppSidebarFooter from "./AppSidebarFooter.vue";
+import Separator from "./ui/separator/Separator.vue";
 
 const route = useRoute();
 
+const isActive = (url: string) => {
+    if (url === "/dashboard") return route.path === "/dashboard";
+    return route.path === url || route.path.startsWith(url + "/");
+};
+
 const items = [
-    {
-        title: "Home",
-        url: "/dashboard",
-        icon: Home,
-    },
-    {
-        title: "Inbox",
-        url: "/dashboard/inbox",
-        icon: Inbox,
-    },
-    {
-        title: "Calendar",
-        url: "/dashboard/calendar",
-        icon: Calendar,
-    },
-    {
-        title: "Search",
-        url: "/dashboard/search",
-        icon: Search,
-    },
-    {
-        title: "Settings",
-        url: "/dashboard/settings",
-        icon: Settings,
-    },
+    { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+    { title: "Skills", url: "/dashboard/skills", icon: BookOpen },
+    { title: "Tasks", url: "/dashboard/tasks", icon: CheckSquare },
+    { title: "Habits", url: "/dashboard/habits", icon: Activity },
+    { title: "Analytics", url: "/dashboard/analytics", icon: BarChart2 },
+    { title: "Settings", url: "/dashboard/settings", icon: Settings },
 ];
 </script>
 
 <template>
     <Sidebar side="left" collapsible="icon">
-        <SidebarContent>
-            <div class="flex items-center gap-3 px-4 py-3">
+        <SidebarHeader>
+            <div
+                class="flex items-center gap-3 px-2 py-2 overflow-hidden group-data-[collapsible=icon]:px-0 group-data-[collapsible=icon]:justify-center"
+            >
                 <img
                     :src="Logo"
                     alt="DevLevel logo"
-                    class="w-8 h-8 object-contain"
+                    class="w-8 h-8 object-contain shrink-0"
                 />
-                <span class="text-lg font-semibold">DevLevel</span>
+                <span
+                    class="text-lg font-semibold group-data-[collapsible=icon]:hidden truncate"
+                >
+                    DevLevel
+                </span>
             </div>
+        </SidebarHeader>
 
+        <SidebarContent>
             <SidebarGroup>
                 <SidebarGroupContent>
                     <SidebarMenu>
@@ -65,7 +68,13 @@ const items = [
                         >
                             <SidebarMenuButton
                                 as-child
-                                :is-active="route.path === item.url"
+                                :is-active="isActive(item.url)"
+                                class="py-5"
+                                :class="
+                                    isActive(item.url)
+                                        ? 'bg-emerald-100! text-emerald-600! font-semibold border-r-2 border-emerald-500 hover:bg-emerald-100! hover:text-emerald-600!'
+                                        : 'hover:bg-emerald-100'
+                                "
                             >
                                 <RouterLink
                                     :to="item.url"
@@ -73,9 +82,13 @@ const items = [
                                 >
                                     <component
                                         :is="item.icon"
-                                        class="w-4 h-4"
+                                        class="w-4 h-4 shrink-0"
                                     />
-                                    <span>{{ item.title }}</span>
+                                    <span
+                                        class="group-data-[collapsible=icon]:hidden truncate"
+                                    >
+                                        {{ item.title }}
+                                    </span>
                                 </RouterLink>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
@@ -83,5 +96,9 @@ const items = [
                 </SidebarGroupContent>
             </SidebarGroup>
         </SidebarContent>
+
+        <Separator />
+
+        <AppSidebarFooter />
     </Sidebar>
 </template>
