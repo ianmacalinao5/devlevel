@@ -7,7 +7,11 @@ import {
 import Login from "@/views/auth/Login.vue";
 import Signup from "@/views/auth/Signup.vue";
 import Dashboard from "@/views/dashboard/Dashboard.vue";
-import Users from "@/views/dashboard/Users.vue";
+import Profile from "@/views/profile/ProfileSettings.vue";
+import Skills from "@/views/dashboard/Skills.vue";
+import Tasks from "@/views/dashboard/Tasks.vue";
+import Analytics from "@/views/dashboard/Analytics.vue";
+import Habits from "@/views/dashboard/Habits.vue";
 import Home from "@/views/public/Home.vue";
 import About from "@/views/public/About.vue";
 import { useAuthStore } from "@/stores/useAuthStore";
@@ -43,9 +47,49 @@ const routes: RouteRecordRaw[] = [
         },
     },
     {
-        path: "/users",
-        component: Users,
-        meta: { layout: "SidebarLayout", title: "Users", requiresAuth: true },
+        path: "/dashboard/skills",
+        component: Skills,
+        meta: {
+            layout: "SidebarLayout",
+            title: "Skills",
+            requiresAuth: true,
+        },
+    },
+    {
+        path: "/dashboard/tasks",
+        component: Tasks,
+        meta: {
+            layout: "SidebarLayout",
+            title: "Tasks",
+            requiresAuth: true,
+        },
+    },
+    {
+        path: "/dashboard/habits",
+        component: Habits,
+        meta: {
+            layout: "SidebarLayout",
+            title: "Habits",
+            requiresAuth: true,
+        },
+    },
+    {
+        path: "/dashboard/analytics",
+        component: Analytics,
+        meta: {
+            layout: "SidebarLayout",
+            title: "Analytics",
+            requiresAuth: true,
+        },
+    },
+    {
+        path: "/profile-settings",
+        component: Profile,
+        meta: {
+            layout: "SidebarLayout",
+            title: "Profile Settings",
+            requiresAuth: true,
+        },
     },
     {
         path: "/:pathMatch(.*)*",

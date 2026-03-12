@@ -12,7 +12,7 @@ const user = computed(() => authStore.user);
 <template>
     <SidebarFooter>
         <RouterLink
-            to="/dashboard/profile"
+            to="/profile-settings"
             class="flex items-center gap-3 px-2 py-3 rounded-md overflow-hidden group-data-[collapsible=icon]:justify-center"
         >
             <Avatar class="w-8 h-8 shrink-0">

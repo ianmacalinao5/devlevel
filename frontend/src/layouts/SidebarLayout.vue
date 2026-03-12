@@ -20,12 +20,9 @@ async function logout() {
 <template>
     <SidebarProvider>
         <div class="flex min-h-screen w-full bg-muted/30">
-            <!-- Sidebar -->
             <AppSidebar />
 
-            <!-- Content Area -->
             <div class="flex flex-1 flex-col">
-                <!-- Header -->
                 <header
                     class="border-b bg-background px-2 md:px-6 py-3 flex justify-between items-center"
                 >
@@ -46,7 +43,6 @@ async function logout() {
                     </Button>
                 </header>
 
-                <!-- Main Content -->
                 <main class="flex-1 p-6">
                     <RouterView />
                 </main>

@@ -5,7 +5,6 @@ import {
     CheckSquare,
     Activity,
     BarChart2,
-    Settings,
 } from "lucide-vue-next";
 import { RouterLink, useRoute } from "vue-router";
 import Logo from "@/assets/devlevel-logo.png";
@@ -35,7 +34,6 @@ const items = [
     { title: "Tasks", url: "/dashboard/tasks", icon: CheckSquare },
     { title: "Habits", url: "/dashboard/habits", icon: Activity },
     { title: "Analytics", url: "/dashboard/analytics", icon: BarChart2 },
-    { title: "Settings", url: "/dashboard/settings", icon: Settings },
 ];
 </script>
 

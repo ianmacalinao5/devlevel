@@ -90,8 +90,13 @@ export function useSignup() {
             email.value = "";
             password.value = "";
             confirmPassword.value = "";
-        } catch (error) {
-            toast.error("Signup failed. Please try again.");
+        } catch (error: any) {
+            const message =
+                error?.response?.data?.errors?.email?.[0] ||
+                error?.response?.data?.message ||
+                "Signup failed. Please try again.";
+
+            toast.error(message);
         } finally {
             loading.value = false;
         }
