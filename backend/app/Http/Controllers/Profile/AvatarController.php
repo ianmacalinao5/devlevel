@@ -12,12 +12,10 @@ class AvatarController extends Controller
 	{
 		$user = $request->user();
 
-		// delete old avatar if exists
 		if ($user->avatar) {
 			Storage::disk('public')->delete($user->avatar);
 		}
 
-		// store new avatar
 		$path = $request->file('avatar')->store('avatars', 'public');
 
 		$user->update([

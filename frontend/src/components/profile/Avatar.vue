@@ -86,7 +86,9 @@ const initials = computed(() => {
             </div>
         </div>
 
-        <CardFooter class="flex items-center justify-between border px-5 py-3">
+        <CardFooter
+            class="flex items-center justify-between border-t px-5 py-3!"
+        >
             <p class="text-sm text-muted-foreground">Maximum file size: 5MB.</p>
 
             <Button
