@@ -1,20 +1,10 @@
 <script setup lang="ts">
-import Button from "@/components/ui/button/Button.vue";
 import { useAuthStore } from "@/stores/useAuthStore";
-import { useRouter } from "vue-router";
-import { toast } from "vue-sonner";
 import Skeleton from "@/components/ui/skeleton/Skeleton.vue";
 import AppSidebar from "@/components/AppSidebar.vue";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 const authStore = useAuthStore();
-const router = useRouter();
-
-async function logout() {
-    await authStore.logout();
-    router.push("/");
-    toast.success("Log Out Successful!");
-}
 </script>
 
 <template>
@@ -37,10 +27,6 @@ async function logout() {
                             <Skeleton class="w-20 h-4" />
                         </template>
                     </span>
-
-                    <Button variant="destructive" size="sm" @click="logout">
-                        Logout
-                    </Button>
                 </header>
 
                 <main class="flex-1 p-6">

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SignupRequest extends FormRequest
+class NewNameRequest extends FormRequest
 {
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -23,8 +23,6 @@ class SignupRequest extends FormRequest
 	{
 		return [
 			'name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'],
-			"email" => ["required", "email", "unique:users,email"],
-			"password" => ["required", "min:8", "confirmed"],
 		];
 	}
 }
