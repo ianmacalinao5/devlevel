@@ -16,5 +16,5 @@ export async function updateName(name: string) {
 }
 
 export async function deleteAccount() {
-    return api.delete("/profile");
+    return api.delete("/profile/delete-account");
 }

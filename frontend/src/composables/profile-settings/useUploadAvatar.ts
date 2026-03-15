@@ -47,12 +47,11 @@ export function useUploadAvatar() {
 
             const res = await profileService.updateAvatar(formData);
 
-            // update global auth user
             authStore.updateUser({
                 avatar: res.avatar,
             });
 
-            toast.success("Avatar updated successfully");
+            toast.success(res.message);
 
             reset();
         } catch (error) {

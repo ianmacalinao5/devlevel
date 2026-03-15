@@ -23,7 +23,8 @@ class AvatarController extends Controller
 		]);
 
 		return response()->json([
-			'avatar' => $path
+			'avatar' => $path,
+			'message' => 'Avatar updated successfully',
 		]);
 	}
 }

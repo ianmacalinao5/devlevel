@@ -42,7 +42,7 @@ export function useUpdateName() {
             authStore.updateUser({
                 name: res.user.name,
             });
-            toast.success("Update Name Successful!");
+            toast.success(res.message);
         } catch (error: any) {
             toast.error(
                 error?.response?.data?.message ?? "Something went wrong",

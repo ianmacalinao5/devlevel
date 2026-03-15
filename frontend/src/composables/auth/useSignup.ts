@@ -1,8 +1,10 @@
 import { ref } from "vue";
 import * as authService from "@/services/auth";
 import { toast } from "vue-sonner";
+import { useRouter } from "vue-router";
 
 export function useSignup() {
+    const router = useRouter();
     const name = ref("");
     const email = ref("");
     const password = ref("");
@@ -85,6 +87,7 @@ export function useSignup() {
             );
 
             toast.success("Signup successful!");
+            router.push("/login");
 
             name.value = "";
             email.value = "";

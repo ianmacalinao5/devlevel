@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\NewNameRequest;
 use Illuminate\Http\Request;
 
-class NameEmailController extends Controller
+class AccountController extends Controller
 {
 	public function newName(NewNameRequest $request)
 	{
@@ -19,6 +19,18 @@ class NameEmailController extends Controller
 		return response()->json([
 			'message' => 'Name updated successfully',
 			'user' => $user,
+		]);
+	}
+
+	public function deleteAccount(Request $request)
+	{
+		$user = $request->user();
+
+		$user->tokens()->delete();
+		$user->delete();
+
+		return response()->json([
+			'message' => 'Account deleted successfully'
 		]);
 	}
 }
