@@ -9,7 +9,7 @@ const authStore = useAuthStore();
 
 <template>
     <SidebarProvider>
-        <div class="flex min-h-screen w-full bg-muted/30">
+        <div class="flex min-h-screen w-full bg-muted/30 dark:bg-slate-800">
             <AppSidebar />
 
             <div class="flex flex-1 flex-col">
@@ -18,15 +18,19 @@ const authStore = useAuthStore();
                 >
                     <SidebarTrigger />
 
-                    <span class="text-sm text-muted-foreground">
-                        <template v-if="authStore.user">
-                            Welcome back {{ authStore.user.name }}
-                        </template>
+                    <div class="flex items-center gap-5">
+                        <span
+                            class="text-sm dark:text-white text-muted-foreground"
+                        >
+                            <template v-if="authStore.user">
+                                Welcome back {{ authStore.user.name }}
+                            </template>
 
-                        <template v-else>
-                            <Skeleton class="w-20 h-4" />
-                        </template>
-                    </span>
+                            <template v-else>
+                                <Skeleton class="w-20 h-4" />
+                            </template>
+                        </span>
+                    </div>
                 </header>
 
                 <main class="flex-1 p-6">
