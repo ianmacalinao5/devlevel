@@ -5,6 +5,7 @@ import Input from "@/components/ui/input/Input.vue";
 import Label from "@/components/ui/label/Label.vue";
 import Spinner from "@/components/ui/spinner/Spinner.vue";
 import { useLogin } from "@/composables/auth/useLogin";
+import Checkbox from "@/components/ui/checkbox/Checkbox.vue";
 
 const {
     email,
@@ -14,6 +15,7 @@ const {
     errorClass,
     showPassword,
     loading,
+    rememberMe,
     togglePasswordVisibility,
     login,
 } = useLogin();
@@ -70,6 +72,21 @@ const {
                 </p>
             </div>
 
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <Checkbox id="remember" v-model="rememberMe" />
+                    <Label for="remember" class="text-muted-foreground text-sm"
+                        >Remember me</Label
+                    >
+                </div>
+
+                <RouterLink
+                    to="/forgot-password"
+                    class="text-sm text-muted-foreground hover:underline"
+                >
+                    Forgot password?
+                </RouterLink>
+            </div>
             <Button
                 type="submit"
                 variant="emerald"

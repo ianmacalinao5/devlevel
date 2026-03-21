@@ -7,6 +7,7 @@ import { useAuthStore } from "@/stores/useAuthStore";
 export function useLogin() {
     const email = ref("");
     const password = ref("");
+    const rememberMe = ref(false);
     const emailError = ref("");
     const passwordError = ref("");
     const showPassword = ref(false);
@@ -51,7 +52,11 @@ export function useLogin() {
         loading.value = true;
 
         try {
-            const data = await authService.login(email.value, password.value);
+            const data = await authService.login(
+                email.value,
+                password.value,
+                rememberMe.value,
+            );
 
             authStore.setAuth(data);
             toast.success("Login successful");
@@ -74,6 +79,7 @@ export function useLogin() {
     return {
         email,
         password,
+        rememberMe,
         emailError,
         passwordError,
         errorClass,
