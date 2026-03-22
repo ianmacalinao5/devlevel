@@ -20,7 +20,15 @@ import {
 } from "@/components/ui/sidebar";
 import AppSidebarFooter from "./AppSidebarFooter.vue";
 import Separator from "./ui/separator/Separator.vue";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useSidebar } from "@/components/ui/sidebar/utils";
 
+const { state } = useSidebar();
 const route = useRoute();
 
 const isActive = (url: string) => {
@@ -64,31 +72,42 @@ const items = [
                             v-for="item in items"
                             :key="item.title"
                         >
-                            <SidebarMenuButton
-                                as-child
-                                :is-active="isActive(item.url)"
-                                class="py-5"
-                                :class="
-                                    isActive(item.url)
-                                        ? 'bg-emerald-100! text-emerald-600! font-semibold border-r-2 border-emerald-500 hover:bg-emerald-100! hover:text-emerald-600!'
-                                        : 'hover:bg-emerald-100'
-                                "
-                            >
-                                <RouterLink
-                                    :to="item.url"
-                                    class="flex items-center gap-3"
-                                >
-                                    <component
-                                        :is="item.icon"
-                                        class="w-4 h-4 shrink-0"
-                                    />
-                                    <span
-                                        class="group-data-[collapsible=icon]:hidden truncate"
-                                    >
-                                        {{ item.title }}
-                                    </span>
-                                </RouterLink>
-                            </SidebarMenuButton>
+                            <TooltipProvider>
+                                <Tooltip :disabled="state !== 'collapsed'">
+                                    <TooltipTrigger as-child>
+                                        <SidebarMenuButton
+                                            as-child
+                                            :is-active="isActive(item.url)"
+                                            class="py-5"
+                                            :class="
+                                                isActive(item.url)
+                                                    ? 'bg-emerald-100! text-emerald-600! font-semibold border-r-2 border-emerald-500 hover:bg-emerald-100! hover:text-emerald-600!'
+                                                    : 'hover:bg-emerald-100'
+                                            "
+                                        >
+                                            <RouterLink
+                                                :to="item.url"
+                                                class="flex items-center gap-3"
+                                            >
+                                                <component
+                                                    :is="item.icon"
+                                                    class="w-4 h-4 shrink-0"
+                                                />
+                                                <span
+                                                    class="group-data-[collapsible=icon]:hidden truncate"
+                                                >
+                                                    {{ item.title }}
+                                                </span>
+                                            </RouterLink>
+                                        </SidebarMenuButton>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="right" align="center">
+                                        <p>
+                                            {{ item.title }}
+                                        </p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
                         </SidebarMenuItem>
                     </SidebarMenu>
                 </SidebarGroupContent>
