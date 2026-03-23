@@ -6,6 +6,7 @@ import {
 
 import Login from "@/views/auth/Login.vue";
 import Signup from "@/views/auth/Signup.vue";
+import ForgotPassword from "@/views/auth/ForgotPassword.vue";
 import Dashboard from "@/views/dashboard/Dashboard.vue";
 import Profile from "@/views/profile/ProfileSettings.vue";
 import Skills from "@/views/dashboard/Skills.vue";
@@ -36,6 +37,15 @@ const routes: RouteRecordRaw[] = [
         path: "/signup",
         component: Signup,
         meta: { layout: "AuthLayout", title: "Signup", guestOnly: true },
+    },
+    {
+        path: "/forgot-password",
+        component: ForgotPassword,
+        meta: {
+            layout: "AuthLayout",
+            title: "Forgot Password",
+            guestOnly: true,
+        },
     },
     {
         path: "/dashboard",

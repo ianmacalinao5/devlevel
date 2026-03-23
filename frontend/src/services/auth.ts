@@ -39,3 +39,11 @@ export async function getUser() {
     const response = await api.get("/user");
     return response.data;
 }
+
+export async function forgotPassword(email: string) {
+    const response = await api.post("/forgot-password", {
+        email,
+    });
+
+    return response.data;
+}
