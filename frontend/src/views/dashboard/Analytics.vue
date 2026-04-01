@@ -1,5 +1,5 @@
 <script setup lang="ts"></script>
 
 <template>
-    <h1>Analytics</h1>
+    <h1 class="text-xl xl:text-2xl">Analytics</h1>
 </template>
