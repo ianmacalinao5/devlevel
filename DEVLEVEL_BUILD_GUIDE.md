@@ -1,277 +1,409 @@
-# DevLevel — Developer Growth System (Updated Build Guide)
-
-## Project Vision
-
-Build a SaaS‑style developer growth platform that combines:
-
-- Skill tracking
-- Daily routine tracking
-- Task management
-- Progress analytics
-- Public developer profile
-
-Goal:
-A system that measures _real developer growth_ using both skill progress and daily discipline data.
+# DevLevel — Developer Growth System (MVP Build Guide)
 
 ---
 
-# Core System Modules
+# 🧭 Project Vision
 
-## 1. Authentication & Users
+DevLevel is a developer growth tracking system that measures:
 
-- Secure login/register
-- Profile settings
-- Username slug for public profile
+- Skill progress
+- Daily consistency
+- Overall readiness score
 
-Done when:
-User can authenticate and access dashboard.
-
----
-
-## 2. Skills Tracker
-
-Tracks knowledge progress.
-
-Tables:
-
-- categories
-- skills
-- user_skills
-
-Features:
-
-- checklist skills
-- progress % per category
-- strongest stack detection
-
-Logic:
-progress = completed / total
-
-Done when:
-User sees skill progress dashboard.
+**Goal:**
+Provide a clear, data-driven way to track developer improvement and job readiness.
 
 ---
 
-## 3. Daily Routine Tracker ⭐
+# 🧱 Final Scope (MVP)
 
-Tracks consistency, not just knowledge.
+Only build these:
 
-Tables:
-
-- habits
-- habit_logs
-
-Features:
-
-- log study hours
-- coding time
-- practice problems
-- streak tracking
-
-Metrics:
-
-- weekly consistency score
-- streak count
-
-Done when:
-User can log daily activity.
+1. Authentication
+2. Skills Tracker
+3. Daily Routine Tracker
+4. Growth Engine
+5. Dashboard
+6. UI Polish + Deployment
 
 ---
 
-## 4. Task Management System
+# 🗂️ Sidebar Navigation (Frontend UX Plan)
 
-Lightweight productivity system.
+### Sidebar Items
 
-Tables:
-
-- tasks
-
-Fields:
-
-- title
-- status
-- priority
-- due_date
-
-Views:
-
-- Today
-- Upcoming
-- Completed
-
-Done when:
-User can manage tasks.
+- Dashboard
+- Skills
+- Routine
+- Profile
 
 ---
 
-## 5. Growth Engine (Core Logic Layer)
+## 🧭 1. Dashboard
 
-Calculates developer readiness score.
+**Purpose:**
+Central overview of user progress.
 
-Formula Example:
+**Display:**
 
-score = (skill_progress _ 0.7) + (consistency_score _ 0.3)
+- Growth Score (main highlight)
+- Level (Beginner → Strong Candidate)
+- Skill Progress %
+- Consistency Score
+- Current Streak
 
-Levels:
+**Components:**
 
-- 0–40 Beginner
-- 40–65 Learning
-- 65–85 Job Ready
-- 85–100 Strong Candidate
-
-Done when:
-Dashboard displays level.
-
----
-
-## 6. Analytics Dashboard
-
-Charts:
-
-- skill growth over time
-- habit consistency
-- productivity trend
-
-Libraries:
-
-- Chart.js or ApexCharts
-
-Done when:
-User sees growth insights visually.
+- ScoreCard.vue
+- ProgressCard.vue
+- StreakCard.vue
 
 ---
 
-## 7. Public Developer Profile
+## 🧠 2. Skills
 
-Route:
-/profile/{username}
+**Purpose:**
+Track knowledge progress.
 
-Displays:
+**Display:**
 
-- strongest skills
-- readiness level
-- activity consistency
-- completed tasks count
+- Categories (Frontend, Backend, etc.)
+- Skills checklist per category
+- Progress bar per category
 
-Bonus:
+**Features:**
 
-- share link
-- export PDF
-
-Done when:
-Profile is publicly accessible.
+- Toggle skill completion
+- Auto-update progress %
 
 ---
 
-## 8. Production Polish
+## 🔁 3. Routine
 
-Add:
+**Purpose:**
+Track daily discipline.
 
-- loading states
-- empty states
-- validation feedback
-- toast notifications
-- responsive layout
+**Display:**
 
-Done when:
-App feels production‑ready.
+- Today’s log form
+- Last 7 days activity
+- Streak count
 
----
+**Inputs:**
 
-## 9. Deployment
+- Coding hours
+- Study hours
 
-Deploy:
-Backend → VPS / Render
-Frontend → Vercel
+**Features:**
 
-README must include:
-
-- live link
-- screenshots
-- feature list
-- demo account
+- Daily logging
+- Streak calculation
+- Weekly consistency score
 
 ---
 
-# Suggested Build Order (Important)
+## 👤 4. Profile
 
-Always build in this order:
+**Purpose:**
+Basic user info.
 
-Function → Logic → UI → Polish
+**Display:**
 
-Recommended module order:
+- Name
+- Email
+- Username (slug)
+- Joined date
 
-1. Auth
-2. Skills
-3. Tasks
-4. Habits
-5. Growth Engine
-6. Analytics
-7. Public Profile
-8. Polish
+**Features:**
 
----
-
-# Database Architecture
-
-Core Tables:
-
-- users
-- categories
-- skills
-- user_skills
-- habits
-- habit_logs
-- tasks
-
-This schema demonstrates relational design + production thinking.
+- Update profile info
 
 ---
 
-# Backend Architecture Structure
+# 🧢 Header Content
 
+- App Name: DevLevel
+- User dropdown:
+    - Profile
+    - Logout
+
+- Optional:
+    - Current Level badge
+
+---
+
+# 🗄️ Database Schema (MVP)
+
+## users
+
+- id
+- name
+- email
+- password
+- username (unique)
+- created_at
+
+---
+
+## categories
+
+- id
+- name
+
+---
+
+## skills
+
+- id
+- category_id
+- name
+
+---
+
+## user_skills
+
+- id
+- user_id
+- skill_id
+- is_completed (boolean)
+
+---
+
+## habits
+
+- id
+- user_id
+- name (e.g. Coding, Study)
+
+---
+
+## habit_logs
+
+- id
+- user_id
+- date
+- coding_hours (float)
+- study_hours (float)
+
+---
+
+# 🧠 Core Logic
+
+---
+
+## Skill Progress
+
+```php
+progress = completed_skills / total_skills * 100;
+```
+
+---
+
+## Consistency Score (last 7 days)
+
+```php
+consistency = (days_logged / 7) * 100;
+```
+
+---
+
+## Streak Logic
+
+- Count consecutive days with logs
+- Reset if day missed
+
+---
+
+## Growth Score
+
+```php
+score = (skill_progress * 0.7) + (consistency_score * 0.3);
+```
+
+---
+
+## Level Mapping
+
+- 0–40 → Beginner
+- 40–65 → Learning
+- 65–85 → Job Ready
+- 85–100 → Strong Candidate
+
+---
+
+# 🧩 Backend Structure (Laravel)
+
+```
 app/
-
-- Actions
-- DTOs
-- Services
-- Repositories
-- Policies
-- Controllers
-- Resources
+ ├── Http/
+ │    ├── Controllers/
+ │
+ ├── Services/
+ │    ├── SkillService.php
+ │    ├── HabitService.php
+ │    ├── GrowthService.php
+ │
+ ├── Models/
+ ├── Policies/
+ ├── Http/Resources/
+```
 
 ---
 
-# Frontend Architecture Structure
+## Key Services
 
+### SkillService
+
+- calculateProgress()
+- toggleSkill()
+
+### HabitService
+
+- logToday()
+- calculateStreak()
+- calculateConsistency()
+
+### GrowthService
+
+- calculateScore()
+- getLevel()
+
+---
+
+# 🖥️ Frontend Structure (Vue 3 + TS)
+
+```
 src/
-
-- modules
-- components
-- composables
-- stores
-- services
-- pages
+ ├── modules/
+ │    ├── auth/
+ │    ├── skills/
+ │    ├── routine/
+ │    ├── dashboard/
+ │
+ ├── components/
+ │    ├── ui/
+ │    ├── cards/
+ │
+ ├── composables/
+ │    ├── useSkills.ts
+ │    ├── useHabits.ts
+ │    ├── useGrowth.ts
+ │
+ ├── stores/
+ │    ├── authStore.ts
+ │    ├── skillStore.ts
+ │    ├── habitStore.ts
+ │
+ ├── services/
+ │    ├── api.ts
+ │
+ ├── pages/
+```
 
 ---
 
-# Golden Rule
+# 🔌 API Endpoints
 
-Small working features > unfinished big features
+## Auth
 
-Ship features vertically, not horizontally.
+- POST /login
+- POST /register
+- POST /logout
 
 ---
 
-# Portfolio Value Statement
+## Skills
 
-This project demonstrates:
+- GET /skills
+- POST /skills/toggle
 
-- full‑stack architecture
-- real SaaS design
-- analytics systems
-- relational modeling
-- state management
-- production UI
+---
 
-When completed, this should be your **main portfolio project**.
+## Habits
+
+- GET /habits
+- POST /habits/log
+
+---
+
+## Growth
+
+- GET /growth
+
+Returns:
+
+- skill_progress
+- consistency_score
+- score
+- level
+
+---
+
+# 🎨 UI Components Checklist
+
+- Sidebar
+- Header
+- Cards (reusable)
+- Progress bars
+- Form inputs
+- Toast notifications
+
+---
+
+# ⚡ Build Order (STRICT)
+
+1. Auth (login/register)
+2. Skills (CRUD + progress)
+3. Routine (logging + streak)
+4. Growth Engine (score + level)
+5. Dashboard UI
+6. Polish
+7. Deploy
+
+---
+
+# 🎯 Definition of Done
+
+✔ User can log in
+✔ User can track skills
+✔ User can log daily activity
+✔ System calculates growth score
+✔ Dashboard displays everything clearly
+✔ App is deployed
+
+---
+
+# 🔮 Future Improvements (DO NOT BUILD NOW)
+
+- Public profile page
+- Charts (analytics)
+- Task management
+- Export to PDF
+
+---
+
+# 🧠 Golden Rule
+
+> Small working system > Big unfinished system
+
+---
+
+# 💼 Portfolio Value Statement
+
+DevLevel demonstrates:
+
+- Full-stack Laravel + Vue architecture
+- Relational database design
+- Business logic implementation (growth scoring)
+- State management with Pinia
+- Clean UI and user experience
+
+---
+
+# 🚀 Final Goal
+
+Be able to confidently say:
+
+> “I built a developer growth tracking system that combines skill progress and daily consistency into a measurable readiness score.”
+
+---
